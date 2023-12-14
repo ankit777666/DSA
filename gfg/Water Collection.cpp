@@ -23,4 +23,20 @@ public:
         
         return water;
     }
+    /**
+     *  int l=0,r=n-1;
+        int lm=0,rm=0;
+        long long rst=0;
+        while(l<=r){
+            if(lm<rm){
+                rst+=max(0,lm-arr[l]);
+                lm=max(lm,arr[l++]);
+            }
+            else{
+                rst+=max(0,rm-arr[r]);
+                rm=max(rm,arr[r--]);
+            }
+        }
+        return rst;
+    */
 };
