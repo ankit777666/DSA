@@ -53,3 +53,51 @@ public:
         
     }
 };
+
+////optimized
+class Solution {
+public:
+    bool util(int index, vector<int>& matchsticks, int sum, vector<int>&sides) {
+        if(index==matchsticks.size()) {
+            if(sides[0]==sides[1] && sides[1]==sides[2] &&
+                sides[2]==sides[3]) {
+                    return true;
+                }
+            else {
+                return false;
+            }
+        }
+        for(int i=0; i<4; i++) {
+            if(sides[i]+matchsticks[index]>sum)
+                continue;
+            int j=i-1;
+            while(j>=0) {
+                if(sides[j]==sides[i])
+                    break;
+                j--;
+            }
+            if(j!=-1)
+                continue;
+            sides[i]+=matchsticks[index];
+            if(util(index+1, matchsticks, sum, sides)) {
+                return true;
+            }
+            sides[i]-=matchsticks[index];
+        }
+        return false;
+    }
+    bool makesquare(vector<int>& matchsticks) {
+        if(matchsticks.size()<4) return false;
+        sort(matchsticks.begin(), matchsticks.end(),greater<int>());
+        int sum=0; int index=0;
+        for(int i=0; i<matchsticks.size(); i++) {
+            sum+=matchsticks[i];
+        }
+        if(sum%4!=0) return false;
+        sum/=4;
+        vector<int>sides(4,0);
+        return util(index, matchsticks, sum,sides);
+        
+        
+    }
+};
