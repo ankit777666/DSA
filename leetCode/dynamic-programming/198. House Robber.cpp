@@ -1,3 +1,4 @@
+// tablulation
 class Solution {
 public:
     int rob(vector<int>& nums) {
@@ -12,4 +13,21 @@ public:
         }
         return dp[n];
     }
+};
+
+//recursion
+class Solution {
+public:
+    int util(int index, vector<int>&nums) {
+        if(index==0)
+            return nums[0];
+        if(index<0)
+            return 0;
+        return max(nums[index]+util(index-2, nums), util(index-1,nums));
+    }
+    int rob(vector<int>& nums) {
+    int n=nums.size();
+    int index=n-1;
+    return util(index, nums);   
+    }   
 };
