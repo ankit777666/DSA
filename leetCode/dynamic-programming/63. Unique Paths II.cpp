@@ -37,9 +37,11 @@ public:
 class Solution {
 public:
     int util(int i, int j, int m, int n,vector<vector<int>>& obstacleGrid) {
+        if(i>=0 && j>=0 && obstacleGrid[i][j]==1)
+          return 0;
         if(i==0 && j==0)
             return 1;
-        if(i<0 || j<0 || obstacleGrid[i][j]==1)
+        if(i<0 || j<0)
             return 0;
         return util(i-1,j,m,n,obstacleGrid)+util(i,j-1,m,n,obstacleGrid);
     }
