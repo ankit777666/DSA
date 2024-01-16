@@ -31,3 +31,23 @@ public:
         return util(i, j, m, n);
     }
 };
+
+//memoization
+class Solution {
+public:
+    int util(int i, int j, int m, int n,vector<vector<int>>&dp) {
+        if(i==0 && j==0)
+            return 1;
+        if(i<0 || j<0)
+            return 0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        return dp[i][j]=util(i-1,j,m,n,dp)+util(i,j-1, m,n,dp);
+    }
+    int uniquePaths(int m, int n) {
+        
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        int i=m-1, j=n-1;
+        return util(i, j, m, n,dp);
+    }
+};
