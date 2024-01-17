@@ -25,3 +25,24 @@ public:
             
     }
 };
+
+//recursion
+
+class Solution {
+public:
+    int util(int i, int j, int m, int n,vector<vector<int>>& grid) {
+        if(i==0 && j==0)
+            return grid[i][j];
+        if(i<0 || j<0)
+            return INT_MAX;
+        int down=util(i-1,j,m,n,grid);
+        int right=util(i,j-1,m,n,grid);
+        return min(down, right)+grid[i][j];
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        int m=grid.size(), n=grid[0].size();
+        int i=m-1, j=n-1;
+        return util(i,j,m,n, grid);
+            
+    }
+};
