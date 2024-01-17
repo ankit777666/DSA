@@ -46,3 +46,25 @@ public:
             
     }
 };
+//memoization
+class Solution {
+public:
+    int util(int i, int j, int m, int n,vector<vector<int>>& grid, vector<vector<int>>&dp) {
+        if(i==0 && j==0)
+            return grid[i][j];
+        if(i<0 || j<0)
+            return INT_MAX;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        int down=util(i-1,j,m,n,grid,dp);
+        int right=util(i,j-1,m,n,grid,dp);
+        return dp[i][j]=min(down, right)+grid[i][j];
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        int m=grid.size(), n=grid[0].size();
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        int i=m-1, j=n-1;
+        return util(i,j,m,n, grid,dp);
+            
+    }
+};
