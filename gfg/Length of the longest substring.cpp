@@ -18,3 +18,27 @@ class Solution{
         
     }
 };
+
+//space optimized
+class Solution{
+    public:
+    int longestUniqueSubsttr(string S){
+        //code
+        int n=S.size();
+        //unordered_map<char,int> umap;
+        vector<int>v(256,-1);
+        
+        int i=0, j=0;
+        int maxLen=INT_MIN;
+        while(j<n) {
+            if(v[S[j]-'a'] != -1) {
+                i=max(i, v[S[j]-'a']+1);
+            }
+            maxLen=max(maxLen, j-i+1);
+            v[S[j]-'a']=j;
+            j++;
+        }
+        return maxLen;
+        
+    }
+};
